@@ -14,10 +14,27 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const TITLE = "Nithipan Sivakanthan — Nanotechnology Engineering";
+const DESCRIPTION =
+  "Nanotechnology Engineering student at the University of Waterloo. Digital design, embedded systems, PCB design, and AI acceleration.";
+const SITE_URL = "https://nithipan.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Nithipan Sivakanthan — Nanotechnology Engineering",
-  description:
-    "Nanotechnology Engineering student at the University of Waterloo. Digital design, embedded systems, PCB design, and AI acceleration.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: TITLE,
+    url: SITE_URL,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
