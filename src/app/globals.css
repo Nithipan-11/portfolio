@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0e13;
+  --surface: #10161d;
+  --surface-hover: #141c25;
+  --border: #1f2932;
+  --border-bright: #2d3a44;
+  --accent: #4ade80;
+  --accent-strong: #6ee7a0;
+  --foreground: #e7ebee;
+  --muted: #8b98a3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-bright: var(--border-bright);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+section {
+  scroll-margin-top: 5rem;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--foreground);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Hero tablet: cross-fade between shell screen and internal circuitry */
+.hero-tablet-fade {
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+
+.hero-tablet-fade-hidden {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tablet-fade {
+    transition: none;
+  }
+}
+
+/* Shiki code blocks: let the surrounding card control the background */
+.shiki-wrapper pre {
+  background-color: transparent !important;
+  padding: 1rem;
+  margin: 0;
+}
+
+.shiki-wrapper code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}

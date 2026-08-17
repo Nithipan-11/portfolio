@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#0d1218" />
+  <g stroke="#20303a" stroke-width="2" fill="none">
+    <path d="M0 90 H220 L260 50 H520 L560 90 H800" />
+    <path d="M0 360 H180 L220 400 H620 L660 360 H800" />
+    <path d="M120 0 V140 L160 180 V450" />
+    <path d="M680 0 V120 L640 160 V450" />
+  </g>
+  <g fill="#3a4b57">
+    <circle cx="220" cy="90" r="4" />
+    <circle cx="260" cy="50" r="4" />
+    <circle cx="560" cy="90" r="4" />
+    <circle cx="180" cy="360" r="4" />
+    <circle cx="620" cy="360" r="4" />
+    <circle cx="120" cy="140" r="4" />
+    <circle cx="680" cy="120" r="4" />
+  </g>
+  <rect x="1.5" y="1.5" width="797" height="447" fill="none" stroke="#25333d" stroke-width="3" />
+  <g transform="translate(400,225)">
+    <rect x="-70" y="-45" width="140" height="90" rx="4" fill="#121a21" stroke="#4ade80" stroke-width="2" opacity="0.85" />
+    <g stroke="#4ade80" stroke-width="2" opacity="0.85">
+      <line x1="-70" y1="-25" x2="-90" y2="-25" />
+      <line x1="-70" y1="0" x2="-90" y2="0" />
+      <line x1="-70" y1="25" x2="-90" y2="25" />
+      <line x1="70" y1="-25" x2="90" y2="-25" />
+      <line x1="70" y1="0" x2="90" y2="0" />
+      <line x1="70" y1="25" x2="90" y2="25" />
+    </g>
+    <circle cx="-52" cy="-27" r="3" fill="#4ade80" />
+  </g>
+  <text x="400" y="330" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="3" fill="#4ade80">THUMBNAIL PLACEHOLDER</text>
+  <text x="400" y="354" text-anchor="middle" font-family="monospace" font-size="12" letter-spacing="2" fill="#5a6b76">/public/projects — replace with real image</text>
+</svg>
