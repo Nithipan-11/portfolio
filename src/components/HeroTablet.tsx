@@ -33,7 +33,7 @@ export function HeroTablet() {
     <svg
       aria-hidden
       viewBox="0 0 240 320"
-      className="absolute bottom-4 right-4 w-48 opacity-80 sm:bottom-8 sm:right-8 sm:w-56 lg:right-[11%] lg:top-1/2 lg:bottom-auto lg:w-72 lg:-translate-y-1/2 xl:right-[26%]"
+      className="hidden opacity-80 lg:absolute lg:block lg:right-[11%] lg:top-1/2 lg:w-72 lg:-translate-y-1/2 xl:right-[26%]"
       fill="none"
     >
       <defs>
