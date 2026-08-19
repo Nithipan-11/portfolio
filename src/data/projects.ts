@@ -94,8 +94,8 @@ export const PROJECTS: Project[] = [
     id: "riscv-cpu",
     title: "Simple Single-Cycle RISC-V CPU",
     description:
-      "RV32I subset implemented in Verilog with a full fetch/decode/execute/memory/writeback datapath, simulated in Icarus Verilog.",
-    tags: ["Verilog", "RISC-V", "Computer Architecture", "Icarus Verilog"],
+      "Single-cycle RV32I CPU built from scratch in Verilog, with a working RV32I instruction subset, an ALU, register file, and control unit. Simulating it in Icarus Verilog surfaced two real bugs — a branch-target immediate silently dropping a bit and a sample program that didn't match its own documented output — both caught by tracing simulation, not code review. Assembled from labeled source by a custom two-pass Python assembler. A demo program computes the top scorer from a real NBA Finals box score (Game 5, 2026, Knicks vs. Spurs) using the CPU's own ALU and branch logic.",
+    tags: ["Verilog", "RISC-V", "Computer Architecture", "Python", "Icarus Verilog"],
     thumbnail: "/projects/riscv-thumbnail.png",
     linkType: "github",
     githubUrl: "https://github.com/Nithipan-11/simple-riscv-cpu",
