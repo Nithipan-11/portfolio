@@ -22,7 +22,7 @@ export const TECH_TAGS = [
 ];
 
 export const ABOUT_TEXT =
-  "Hey, I'm Nithipan, a second-year Nanotechnology Engineering student at the University of Waterloo. I enjoy working with circuits, electronics, and code, and learning how hardware and software work together. I like designing PCBs, testing circuits, and building hands-on projects.";
+  "Hey, I'm Nithipan, a second-year Nanotechnology Engineering student at the University of Waterloo. I love working with circuits and electronics, writing the code that brings them to life, and figuring out how hardware and software come together. Whether it's designing PCBs, testing circuits, or building hands-on projects, I'm always looking for the next thing to take apart and understand.";
 
 export const STATS = [
   { value: "2nd", label: "Year Nanotechnology Engineering" },
