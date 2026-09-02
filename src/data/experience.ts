@@ -46,7 +46,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Mechanical Technician",
     org: "MGS Auto Service INC",
     location: "Markham, ON",
-    period: "Jul 2025 – Aug 2025",
+    period: "Jul 2020 – Aug 2025",
     bullets: [
       "Diagnosed and repaired mechanical and electrical systems, working to precise torque and tolerance specifications.",
       "Developed hands-on troubleshooting skills across a range of hardware systems and components.",
