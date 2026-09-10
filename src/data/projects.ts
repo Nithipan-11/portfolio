@@ -189,11 +189,6 @@ export const PROJECTS: Project[] = [
         href: "https://github.com/Syinaric/A.U.R.A.-Farm",
         external: true,
       },
-      {
-        label: "View Post",
-        href: "https://www.linkedin.com/feed/update/urn:li:activity:7394034605210902528/",
-        external: true,
-      },
     ],
   },
 ];
