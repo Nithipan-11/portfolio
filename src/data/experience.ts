@@ -13,10 +13,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     location: "Waterloo, ON",
     period: "May 2026 – Jun 2026",
     bullets: [
-      "Designed a shunt-based current-sensing circuit for a satellite power subsystem using a 0.15Ω shunt resistor and a TI INA180B3 100V/V current-sense amplifier.",
-      "Added a decoupling capacitor to stabilize the amplifier's supply rail against noise.",
-      "Designed a 4-pin connector breaking out GND / V_OUT / 3.3V / V_LOAD for integration with the power system.",
-      "Laid out the schematic and PCB in Altium Designer, applying signal-integrity and noise-mitigation practices.",
+      "Enabled early validation of the satellite's EPS power path before full-board assembly, by designing a current-sensing breakout board in Altium with a 0.15Ω shunt and INA180B3 amplifier (100 V/V gain).",
+      "Supported MPPT testing for the 3 solar panel inputs, measuring load current within 5% accuracy, by bringing up and characterizing the breakout with a bench supply and oscilloscope.",
+      "Prepared the board for Flatsat integration testing with the 5-board PC104 stack, by defining a 4-pin connector (GND/V_OUT/3.3V/V_LOAD) and passing design review with electrical leads.",
     ],
   },
   {
