@@ -4,7 +4,6 @@ export type ExperienceItem = {
   location: string;
   period: string;
   bullets: string[];
-  tags?: string[];
 };
 
 export const EXPERIENCE: ExperienceItem[] = [
@@ -26,16 +25,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     location: "Waterloo, ON",
     period: "Feb 2026 – May 2026",
     bullets: [
-      "Built a **16-bit fixed-point multiplier** in SystemVerilog, computing **10 multiplications per ray** (**3M+ per 640×480 frame**) with integer math, **cutting hardware area** vs. floating-point.",
-      "Designed a **pixel coordinate generator** in SystemVerilog that sweeps all **307,200 pixels** of a **640×480 frame**, producing **one camera ray per clock cycle** for the intersection pipeline.",
-      "Wrote a cocotb testbench for the **ray-sphere hit detector**, verifying **100+ hit/miss cases** against a Python reference model with **0 mismatches**, **catching bugs** before integration and **speeding up team debugging**.",
-    ],
-    tags: [
-      "SystemVerilog",
-      "RTL Design",
-      "Fixed-Point Arithmetic",
-      "cocotb",
-      "Python",
+      "Built a 16-bit fixed-point multiplier in SystemVerilog, computing 10 multiplications per ray (3M+ per 640×480 frame) with integer math, cutting hardware area vs. floating-point.",
+      "Designed a pixel coordinate generator in SystemVerilog that sweeps all 307,200 pixels of a 640×480 frame, producing one camera ray per clock cycle for the intersection pipeline.",
+      "Wrote a cocotb testbench for the ray-sphere hit detector, verifying 100+ hit/miss cases against a Python reference model with 0 mismatches, catching bugs before integration and speeding up team debugging.",
     ],
   },
   {

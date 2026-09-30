@@ -1,19 +1,6 @@
 import { SectionLabel } from "@/components/SectionLabel";
 import { EXPERIENCE } from "@/data/experience";
 
-// Bullets may mark emphasis with **double asterisks**; render those inline.
-function renderBullet(text: string) {
-  return text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
-    i % 2 === 1 ? (
-      <strong key={i} className="font-semibold text-foreground">
-        {part}
-      </strong>
-    ) : (
-      part
-    ),
-  );
-}
-
 export function Experience() {
   return (
     <section id="experience" className="px-6 py-24">
@@ -45,23 +32,10 @@ export function Experience() {
                   {job.bullets.map((bullet, i) => (
                     <li key={i} className="flex gap-3 text-sm leading-relaxed text-muted">
                       <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent" />
-                      <span>{renderBullet(bullet)}</span>
+                      <span>{bullet}</span>
                     </li>
                   ))}
                 </ul>
-
-                {job.tags && (
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {job.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-sm border border-border px-2 py-0.5 font-mono text-[10px] text-muted"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             </article>
           ))}
