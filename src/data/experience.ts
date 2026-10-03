@@ -22,7 +22,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Digital Design Engineer",
     org: "UWASIC (Waterloo ASIC Design Team)",
     location: "Waterloo, ON",
-    period: "Feb 2026 – May 2026",
+    period: "Feb 2026 – Present",
     bullets: [
       "Built a 16-bit fixed-point multiplier in SystemVerilog, computing 10 multiplications per ray (3M+ per 640×480 frame) with integer math, cutting hardware area vs. floating-point.",
       "Designed a pixel coordinate generator in SystemVerilog that sweeps all 307,200 pixels of a 640×480 frame, producing one camera ray per clock cycle for the intersection pipeline.",
