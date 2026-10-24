@@ -33,12 +33,11 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Firmware Developer",
     org: "UW Robotics Team (Mars Rover)",
     location: "Waterloo, ON",
-    period: "Sept 2026 – Oct 2026",
+    period: "Sep 2026 – Oct 2026",
     bullets: [
-      "Enabled the rover's main computer to command servo actuators remotely, by building Mbed OS C++ firmware for an STM32 Nucleo board that decodes 500 kbps CAN frames (4-byte float, 0–100% of range) into servo setpoints.",
-      "Gave future actuator firmware a drop-in servo interface, by writing a reusable TutorialServo driver that generates 50 Hz PWM and clamps and linearly maps commanded angles to 1–2 ms pulse widths across a configurable range.",
-      "Restored full 0–100% servo travel in the training's potentiometer-control app (up from ~30%), by correcting ADC-to-PWM math that treated AnalogIn's normalized 0–1 reading as volts.",
-      "Prevented build failures for future trainees, by fixing CMake library linkage and malformed build-config syntax in the team's training material and integrating both apps into the repo's CMake build.",
+      "Enabled the rover's main computer to command servo actuators over CAN, by building Mbed OS C++ firmware for an STM32 Nucleo board that decodes 500 kbps CAN frames (4-byte float, 0–100%) into servo setpoints.",
+      "Gave future actuator firmware a drop-in servo interface, by writing a reusable TutorialServo driver that generates 50 Hz PWM and maps commanded angles to 1–2 ms pulse widths across a configurable range.",
+      "Restored full 0–100% servo travel (up from ~30%) and fixed build failures in the team's training material, by correcting ADC-to-PWM math that treated AnalogIn's 0–1 reading as volts and repairing CMake linkage.",
     ],
   },
   {
