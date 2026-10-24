@@ -28,6 +28,6 @@ export const ABOUT_TEXT = [
 export const STATS = [
   { value: "2nd", label: "Year Nanotechnology Engineering" },
   { value: "6+", label: "Hands-on Projects Built" },
-  { value: "4", label: "Engineering Roles" },
+  { value: "3", label: "Engineering Design Teams" },
   { value: "Always", label: "Learning Something New" },
 ];
