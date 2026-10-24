@@ -12,6 +12,7 @@ export type ProjectDetails = {
   signalChain?: string[];
   codeSnippet?: { lang: string; code: string; caption?: string };
   images?: { src: string; alt: string; caption: string }[];
+  video?: { src: string; poster?: string; caption?: string };
   bom?: BomItem[];
 };
 
@@ -29,6 +30,7 @@ export type Project = {
   thumbnail: string;
   linkType: ProjectLinkType;
   githubUrl?: string;
+  demoUrl?: string;
   codeScreenshot?: string;
   links?: ProjectLink[];
   details?: ProjectDetails;
@@ -54,6 +56,47 @@ const CDC_SYNCHRONIZER_SNIPPET = `module cdc_synchronizer (
 endmodule`;
 
 export const PROJECTS: Project[] = [
+  {
+    id: "autonomous-navigation",
+    title: "Autonomous Navigation Stack",
+    description:
+      "Lidar-based navigation for a differential-drive robot in ROS 2 (C++) and Gazebo, built on WATonomous' ASD training framework: costmap with obstacle inflation, odometry-based map fusion, an A* planner, and a pure-pursuit controller. Extended with a multi-checkpoint mission planner and a generated obstacle course — the robot clears all 5 checkpoints (104.5 m in 267.5 s) with zero collisions. Fixed wall-clipping by planning from the rotation centre with turning-radius inflation, and replanning deadlocks with path commitment, cost hysteresis, and previous-path bias.",
+    tags: ["ROS 2", "C++", "Gazebo", "A*", "Pure Pursuit", "Docker"],
+    thumbnail: "/projects/nav-thumbnail.png",
+    linkType: "details",
+    githubUrl: "https://github.com/Nithipan-11/ros2-autonomous-navigation",
+    demoUrl: "/projects/nav-demo.mp4",
+    details: {
+      blockDiagram: ["Lidar", "Costmap", "Map Memory", "A* Planner", "Pure Pursuit", "Wheels"],
+      video: {
+        src: "/projects/nav-demo.mp4",
+        poster: "/projects/nav-thumbnail.png",
+        caption: "Full course run in Gazebo, replayed in Foxglove at 5x",
+      },
+      images: [
+        {
+          src: "/projects/nav-route.png",
+          alt: "Top-down obstacle course with the robot's driven route through 5 checkpoints",
+          caption: "Driven Route",
+        },
+        {
+          src: "/projects/nav-slalom.jpg",
+          alt: "Foxglove 3D view of the robot weaving through the slalom with its planned path",
+          caption: "Slalom",
+        },
+        {
+          src: "/projects/nav-pillars.jpg",
+          alt: "Foxglove 3D view of the pillar field with inflated costmap halos",
+          caption: "Pillar Field + Costmap",
+        },
+        {
+          src: "/projects/nav-gate.jpg",
+          alt: "Foxglove 3D view of the A* path threading the gate",
+          caption: "A* Path Through the Gate",
+        },
+      ],
+    },
+  },
   {
     id: "spi-digital-peripheral",
     title: "SPI-Controlled Digital Peripheral",

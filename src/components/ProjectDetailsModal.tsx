@@ -61,16 +61,50 @@ export function ProjectDetailsModal({
                 ))}
               </div>
 
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mb-6 inline-flex items-center gap-1.5 rounded-sm border border-border-bright px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-foreground transition-colors hover:border-accent hover:text-accent"
-                >
-                  View on GitHub
-                  <ArrowUpRight size={12} />
-                </a>
+              {(project.githubUrl || project.demoUrl) && (
+                <div className="mb-6 flex flex-wrap gap-2">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-sm border border-border-bright px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-foreground transition-colors hover:border-accent hover:text-accent"
+                    >
+                      View on GitHub
+                      <ArrowUpRight size={12} />
+                    </a>
+                  )}
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-sm border border-border-bright px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-foreground transition-colors hover:border-accent hover:text-accent"
+                    >
+                      Watch Demo
+                      <ArrowUpRight size={12} />
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {details?.video && (
+                <Block label="Demo">
+                  <video
+                    src={details.video.src}
+                    poster={details.video.poster}
+                    controls
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full rounded-sm border border-border bg-background"
+                  />
+                  {details.video.caption && (
+                    <p className="mt-2 font-mono text-[11px] uppercase tracking-widest text-muted">
+                      {details.video.caption}
+                    </p>
+                  )}
+                </Block>
               )}
 
               {details?.blockDiagram && (
