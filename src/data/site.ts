@@ -21,12 +21,13 @@ export const TECH_TAGS = [
   "Tiny Tapeout",
 ];
 
-export const ABOUT_TEXT =
-  "Hey, I'm Nithipan, a second-year Nanotechnology Engineering student at the University of Waterloo. I'm interested in electronics, embedded systems, and hardware design. I enjoy building hands-on projects that combine hardware with software, from designing PCBs to testing circuits and working with code. I'm always looking for new ways to improve my skills, explore new technologies, and turn ideas into working projects.";
+export const ABOUT_TEXT = [
+  "Hey, I'm Nithipan, a second-year Nanotechnology Engineering student at the University of Waterloo who likes building things where hardware meets software, from digital logic and PCBs to embedded firmware and robots. I learn best by making projects that actually work, and I'm always picking up something new.",
+];
 
 export const STATS = [
   { value: "2nd", label: "Year Nanotechnology Engineering" },
-  { value: "5+", label: "Hands-on Projects Built" },
+  { value: "6+", label: "Hands-on Projects Built" },
   { value: "4", label: "Engineering Roles" },
   { value: "Always", label: "Learning Something New" },
 ];

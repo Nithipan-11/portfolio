@@ -11,9 +11,11 @@ export function About() {
         </h2>
 
         <div className="grid gap-14 lg:grid-cols-5">
-          <p className="text-lg leading-relaxed text-muted sm:text-xl lg:col-span-3">
-            {ABOUT_TEXT}
-          </p>
+          <div className="space-y-5 text-lg leading-relaxed text-muted sm:text-xl lg:col-span-3">
+            {ABOUT_TEXT.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
+          </div>
 
           <div className="grid grid-cols-2 gap-5 lg:col-span-2">
             {STATS.map((stat) => (
