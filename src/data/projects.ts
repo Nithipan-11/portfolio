@@ -55,6 +55,24 @@ const CDC_SYNCHRONIZER_SNIPPET = `module cdc_synchronizer (
     end
 endmodule`;
 
+const DECODE_CACHE_SNIPPET = `// Each 4 KiB page keeps the decoded form of every word fetched from it.
+const Inst& fetch(uint32_t pc) {
+    Page& p = page(pc);  // flat page table: one array index
+    const uint32_t slot = (pc & 0xFFF) >> 2;
+    if (p.valid.test(slot)) return p.decoded[slot];  // hit
+    p.decoded[slot] = decode(load32(pc));
+    p.valid.set(slot);
+    return p.decoded[slot];
+}
+
+// Any store clears the valid bit of the word it touches, so
+// self-modifying code is re-decoded on its next fetch.
+void store8(uint32_t a, uint8_t v) {
+    Page& p = page(a);
+    p.bytes[a & 0xFFF] = v;
+    p.valid.reset((a & 0xFFF) >> 2);
+}`;
+
 export const PROJECTS: Project[] = [
   {
     id: "synthclin",
@@ -93,6 +111,52 @@ export const PROJECTS: Project[] = [
           src: "/projects/synthclin-audit.jpg",
           alt: "Hash-chained access log with integrity verification passing",
           caption: "Tamper-Evident Access Log",
+        },
+      ],
+    },
+  },
+  {
+    id: "rv32sim",
+    title: "rv32sim: RISC-V Instruction-Set Simulator",
+    description:
+      "RV32IM + Zicsr instruction-set simulator in C++20 with precise machine-mode traps. Passes all 64 applicable official riscv-tests and runs bare-metal C at 120–160 MIPS, with a store-invalidated decoded-instruction cache giving a 1.5–2.2x speedup. It is the golden reference for my Verilog CPU: lockstep co-simulation in Icarus Verilog matched 2,000 random programs (141k instructions) commit by commit, mutation testing showed the fuzzer catches 10/10 planted RTL bugs, and a probe found 15 of 19 unsupported instructions in my CPU silently compute wrong results instead of trapping.",
+    tags: ["C++20", "RISC-V", "CMake", "GoogleTest", "Icarus Verilog", "Python", "GitHub Actions"],
+    thumbnail: "/projects/rv32sim-thumbnail.jpg",
+    linkType: "details",
+    githubUrl: "https://github.com/Nithipan-11/rv32sim",
+    demoUrl: "/projects/rv32sim-demo.mp4",
+    details: {
+      blockDiagram: ["ELF / Hex Loader", "Paged Memory", "Decode Cache", "Execute + Traps", "Commit Log", "Lockstep Compare vs RTL"],
+      video: {
+        src: "/projects/rv32sim-demo.mp4",
+        poster: "/projects/rv32sim-thumbnail.jpg",
+        caption: "Unit tests, official riscv-tests, benchmarks, then co-simulation against the Verilog CPU (sped up)",
+      },
+      codeSnippet: {
+        lang: "cpp",
+        code: DECODE_CACHE_SNIPPET,
+        caption: "Decoded-Instruction Cache",
+      },
+      images: [
+        {
+          src: "/projects/rv32sim-isa.jpg",
+          alt: "Terminal output of the official riscv-tests runner showing 64 of 64 tests passing",
+          caption: "Official riscv-tests: 64/64",
+        },
+        {
+          src: "/projects/rv32sim-cosim.jpg",
+          alt: "Differential fuzzer matching 2,000 programs against the Verilog CPU and killing all 10 planted mutants",
+          caption: "Lockstep Fuzzing + Mutation Testing",
+        },
+        {
+          src: "/projects/rv32sim-probe.jpg",
+          alt: "Probe output showing unsupported instructions computing wrong results on the Verilog CPU versus the spec",
+          caption: "Bugs Found in My CPU",
+        },
+        {
+          src: "/projects/rv32sim-bench.jpg",
+          alt: "Benchmark table with MIPS with and without the decode cache, all outputs verified",
+          caption: "Benchmarks: Decode Cache On vs Off",
         },
       ],
     },
