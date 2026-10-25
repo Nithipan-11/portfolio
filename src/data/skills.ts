@@ -79,6 +79,7 @@ export const SKILLS: SkillCategory[] = [
       "GitHub Actions",
       "Docker",
       "CMake",
+      "GoogleTest",
       "Linux",
       "Icarus Verilog",
       "GTKWave",
