@@ -57,6 +57,47 @@ endmodule`;
 
 export const PROJECTS: Project[] = [
   {
+    id: "synthclin",
+    title: "Synthclin: Private Synthetic Patient Data",
+    description:
+      "Generates realistic synthetic hospital records and ships each dataset with evidence it is private and useful. Three conditional generators in PyTorch (VAE, GAN, diffusion) trained with differential privacy via Opacus DP-SGD on 70k de-identified patients, benchmarked across 12 models. Every dataset is attacked with two membership-inference tests and checked by training a readmission model on synthetic data and testing it on real patients: the DP-VAE keeps 92% of real-data AUROC at ε = 3 while attacks stay at chance. Django + Celery run steward-approved accounts, async jobs and a hash-chained audit log; React drives the cohort dashboard.",
+    tags: ["PyTorch", "Opacus", "Differential Privacy", "Django", "Celery", "React", "TypeScript"],
+    thumbnail: "/projects/synthclin-thumbnail.jpg",
+    linkType: "details",
+    githubUrl: "https://github.com/Nithipan-11/synthclin",
+    demoUrl: "/projects/synthclin-demo.mp4",
+    details: {
+      blockDiagram: ["Patient Records", "DP-SGD Generator", "Cohort Raking", "Clinical Constraints", "Privacy + Utility Audit", "CSV / FHIR"],
+      video: {
+        src: "/projects/synthclin-demo.mp4",
+        poster: "/projects/synthclin-thumbnail.jpg",
+        caption: "Shaping a cohort, generating 5,000 patients at ε = 3, and reading the audit (1.6x)",
+      },
+      images: [
+        {
+          src: "/projects/synthclin-generate.jpg",
+          alt: "Dashboard with model picker, age, outcome and diagnosis controls, and a live cohort preview",
+          caption: "Cohort Controls",
+        },
+        {
+          src: "/projects/synthclin-columns.jpg",
+          alt: "Fidelity results and per-column real vs synthetic distribution charts",
+          caption: "Real vs Synthetic, Column by Column",
+        },
+        {
+          src: "/projects/synthclin-tradeoff.jpg",
+          alt: "Privacy vs utility charts across epsilon for VAE, GAN and diffusion models",
+          caption: "Privacy–Utility Trade-off",
+        },
+        {
+          src: "/projects/synthclin-audit.jpg",
+          alt: "Hash-chained access log with integrity verification passing",
+          caption: "Tamper-Evident Access Log",
+        },
+      ],
+    },
+  },
+  {
     id: "autonomous-navigation",
     title: "Autonomous Navigation Stack",
     description:
