@@ -42,15 +42,34 @@ export const SKILLS: SkillCategory[] = [
     ],
   },
   {
+    label: "Machine Learning & Data",
+    items: [
+      "PyTorch",
+      "Opacus (Differential Privacy)",
+      "scikit-learn",
+      "pandas/NumPy/SciPy",
+      "OpenCV",
+      "YOLOv8",
+    ],
+  },
+  {
+    label: "Web & Backend",
+    items: [
+      "Django + REST Framework",
+      "Celery/Redis",
+      "PostgreSQL",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+    ],
+  },
+  {
     label: "EDA & Engineering Software",
     items: [
       "Altium Designer",
       "KiCad",
       "SolidWorks",
       "AutoCAD",
-      "OpenCV",
-      "YOLOv8",
-      "PyTorch",
     ],
   },
   {
