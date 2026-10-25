@@ -69,8 +69,10 @@ async function loadFonts() {
 
 export async function generateOgImage() {
   const fonts = await loadFonts();
-  const mono = fonts.length ? "JetBrains Mono" : undefined;
-  const sans = fonts.length ? "Inter" : undefined;
+  // If Google Fonts can't be reached at build time, fall back to next/og's
+  // bundled font instead of failing the whole build.
+  const mono = fonts.length ? "JetBrains Mono" : "sans-serif";
+  const sans = fonts.length ? "Inter" : "sans-serif";
 
   return new ImageResponse(
     (
@@ -202,7 +204,7 @@ export async function generateOgImage() {
     ),
     {
       ...size,
-      fonts,
+      ...(fonts.length ? { fonts } : {}),
     }
   );
 }
