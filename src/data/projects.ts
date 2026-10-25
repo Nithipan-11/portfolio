@@ -73,6 +73,39 @@ void store8(uint32_t a, uint8_t v) {
     p.valid.reset((a & 0xFFF) >> 2);
 }`;
 
+const BRANCH_IMM_SNIPPET = `// B-type immediate: offset bits are scattered across the instruction.
+// The original version left out instr[31] (offset bit 12), so every
+// negative offset lost its sign and backward branches jumped forward.
+wire [31:0] imm_b = {{19{instr[31]}}, instr[31], instr[7],
+                     instr[30:25], instr[11:8], 1'b0};
+
+// beq takes the branch when rs1 - rs2 == 0; bne when it isn't.
+wire branch_equal     = branch    &  alu_zero;
+wire branch_not_equal = branch_ne & ~alu_zero;
+assign take_branch = branch_equal | branch_not_equal;
+
+assign pc_target = pc + imm_b;
+assign pc_next   = take_branch ? pc_target : pc_plus_4;`;
+
+const STUDY_PAL_SNIPPET = `# Mode priority: PHONE > BREAK > FOCUS > AWAY
+if phone_detected:
+    new_mode = 'PHONE'
+elif break_mode:
+    new_mode = 'BREAK'
+elif face_detected:
+    new_mode = 'FOCUS'
+else:
+    new_mode = 'AWAY'
+
+if new_mode != current_mode:
+    now = time.time()
+    # PHONE overrides instantly; other changes wait out a 1.5 s hold
+    # so the Arduino can finish its blink/beep sequence first
+    if new_mode == 'PHONE' or (now - last_switch_time) >= MODE_MIN_HOLD:
+        current_mode = new_mode
+        send_command(current_mode)   # text line over serial
+        last_switch_time = now`;
+
 export const PROJECTS: Project[] = [
   {
     id: "synthclin",
@@ -240,13 +273,49 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "riscv-cpu",
-    title: "Simple Single-Cycle RISC-V CPU",
+    title: "Single-Cycle RISC-V CPU",
     description:
-      "Single-cycle RV32I CPU built from scratch in Verilog, with a working RV32I instruction subset, an ALU, register file, and control unit. Simulating it in Icarus Verilog surfaced two real bugs — a branch-target immediate silently dropping a bit and a sample program that didn't match its own documented output — both caught by tracing simulation, not code review. Assembled from labeled source by a custom two-pass Python assembler. A demo program computes the top scorer from a real NBA Finals box score (Game 5, 2026, Knicks vs. Spurs) using the CPU's own ALU and branch logic.",
-    tags: ["Verilog", "RISC-V", "Computer Architecture", "Python", "Icarus Verilog"],
+      "Single-cycle RV32I CPU built from scratch in Verilog: program counter, instruction and data memories, a 32×32 register file with hardwired x0, an ALU, and a control unit covering 18 instructions (R/I-type ALU ops, lw, sw, beq, bne). Tracing the simulation in Icarus Verilog exposed a B-type immediate that dropped the offset's sign bit, which broke every backward branch, and a sample program whose hex didn't match its own source. A two-pass Python assembler builds programs from labelled assembly; the demo computes the points total and top scorer of the 2026 NBA Finals Game 5 on the CPU itself. Later verified against rv32sim, my C++ reference model: 2,000 random programs matched commit by commit.",
+    tags: ["Verilog", "RISC-V", "Computer Architecture", "Icarus Verilog", "Python"],
     thumbnail: "/projects/riscv-thumbnail.png",
-    linkType: "github",
+    linkType: "details",
     githubUrl: "https://github.com/Nithipan-11/simple-riscv-cpu",
+    demoUrl: "/projects/riscv-demo.mp4",
+    details: {
+      blockDiagram: ["PC", "Instruction Memory", "Decode + Control", "Register File", "ALU", "Data Memory", "Write-Back"],
+      video: {
+        src: "/projects/riscv-demo.mp4",
+        poster: "/projects/riscv-thumbnail.png",
+        caption: "Sample program, assembler, NBA demo, then 2,000-program co-simulation against rv32sim (sped up)",
+      },
+      codeSnippet: {
+        lang: "verilog",
+        code: BRANCH_IMM_SNIPPET,
+        caption: "Branch Logic (and the Bug Fix)",
+      },
+      images: [
+        {
+          src: "/projects/riscv-waveform.jpg",
+          alt: "Waveform of the CPU summing six scores into x8 and finding the maximum in x7 with slt and beq",
+          caption: "Waveform: Sum, Then Max",
+        },
+        {
+          src: "/projects/riscv-testbench.jpg",
+          alt: "Icarus Verilog output of the sample program trace and the NBA demo final register state",
+          caption: "Testbench Runs",
+        },
+        {
+          src: "/projects/riscv-assembler.jpg",
+          alt: "Two-pass assembler output listing machine code, address and source line for the NBA program",
+          caption: "Two-Pass Assembler",
+        },
+        {
+          src: "/projects/rv32sim-cosim.jpg",
+          alt: "Differential fuzzing matching 2,000 random programs against rv32sim and catching 10 of 10 planted bugs",
+          caption: "Verified Against rv32sim",
+        },
+      ],
+    },
   },
   {
     id: "current-sensing-pcb",
@@ -306,22 +375,42 @@ export const PROJECTS: Project[] = [
     id: "study-pal",
     title: "Study Pal",
     description:
-      "Arduino Uno + Python computer vision over serial for real-time face/object detection (YOLOv8, OpenCV, Ultralytics), built to help you stay focused on your work — with Arduino C++ driving LEDs, a buzzer, and an I2C OLED using non-blocking millis() timing.",
-    tags: ["Arduino", "OpenCV", "YOLOv8", "Python", "C++"],
+      "Desk focus monitor that reacts in hardware. A Python loop runs an OpenCV Haar-cascade face detector and a YOLOv8n phone detector on every webcam frame, picks a mode by priority (phone > break > focus > away) with a 1.5 s hold so it doesn't flicker, and sends it to an Arduino Uno over 9600-baud serial. The Arduino firmware parses commands into a fixed buffer and drives two LEDs, an active buzzer and an SH1106 OLED with millis()-based state machines for the blink and beep patterns, so the serial parser is never blocked by delay(). My first fully self-directed embedded project.",
+    tags: ["Python", "OpenCV", "YOLOv8", "Arduino", "C++", "Serial"],
     thumbnail: "/projects/study-pal-thumbnail.jpg",
-    linkType: "multi-link",
-    links: [
-      {
-        label: "View GitHub",
-        href: "https://github.com/Nithipan-11/Study-Pal",
-        external: true,
+    linkType: "details",
+    githubUrl: "https://github.com/Nithipan-11/Study-Pal",
+    demoUrl: "https://drive.google.com/file/d/1nRSZRYUJun9o3bbWzd23QW_gNX8PoTur/view?usp=sharing",
+    details: {
+      blockDiagram: ["Webcam", "Haar Face + YOLOv8n Phone", "Mode Priority + 1.5 s Hold", "Serial @ 9600", "Arduino Uno", "LEDs / Buzzer / OLED"],
+      codeSnippet: {
+        lang: "python",
+        code: STUDY_PAL_SNIPPET,
+        caption: "Mode Arbitration",
       },
-      {
-        label: "Watch Demo",
-        href: "https://drive.google.com/file/d/1nRSZRYUJun9o3bbWzd23QW_gNX8PoTur/view?usp=sharing",
-        external: true,
-      },
-    ],
+      images: [
+        {
+          src: "/projects/study-pal-thumbnail.jpg",
+          alt: "Breadboard with Arduino Uno, green and red LEDs, buzzer and OLED showing Study Pal Ready",
+          caption: "Breadboard Build",
+        },
+        {
+          src: "/projects/studypal-oled.jpg",
+          alt: "Close-up of the SH1106 OLED showing the Study Pal boot screen",
+          caption: "SH1106 OLED over I2C",
+        },
+        {
+          src: "/projects/studypal-modes.jpg",
+          alt: "Table of each mode's trigger and the LED, buzzer and OLED response",
+          caption: "Mode → Hardware Response",
+        },
+        {
+          src: "/projects/studypal-wiring.jpg",
+          alt: "Wiring diagram of the Arduino Uno to LEDs on D8 and D9, buzzer on D10 and OLED on A4/A5",
+          caption: "Wiring Diagram",
+        },
+      ],
+    },
   },
   {
     id: "autonomous-utility-arm",
