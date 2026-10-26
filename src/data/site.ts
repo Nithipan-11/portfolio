@@ -7,7 +7,7 @@ export const SITE = {
   linkedin: "https://linkedin.com/in/nithipan-sivakanthan",
   // Google Drive folder with hardware / software / firmware / general resumes.
   // Leave empty to hide every resume link on the site.
-  resume: "",
+  resume: "https://drive.google.com/drive/folders/1JswuTuja7q_ShNasgL5IQtCm7ctpzL1T?usp=sharing",
   location: "Waterloo, ON",
 };
 
