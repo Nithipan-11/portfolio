@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { HeroTablet } from "@/components/HeroTablet";
 import { SITE, TECH_TAGS } from "@/data/site";
@@ -32,6 +32,17 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
+            {SITE.resume && (
+              <a
+                href={SITE.resume}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 rounded-sm border border-accent bg-accent/10 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent transition-colors hover:bg-accent/20"
+              >
+                <FileText size={16} />
+                Resumes
+              </a>
+            )}
             <a
               href={SITE.github}
               target="_blank"

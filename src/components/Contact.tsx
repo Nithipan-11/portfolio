@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SITE } from "@/data/site";
@@ -39,6 +39,15 @@ export function Contact() {
             href={SITE.github}
             external
           />
+          {SITE.resume && (
+            <ContactLink
+              icon={<FileText size={18} />}
+              label="Resumes"
+              value="Hardware · Software · Firmware · General"
+              href={SITE.resume}
+              external
+            />
+          )}
         </div>
       </div>
 

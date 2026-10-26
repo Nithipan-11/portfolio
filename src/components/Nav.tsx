@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { FileText, Menu, X } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { SITE } from "@/data/site";
 
@@ -41,6 +41,17 @@ export function Nav() {
         </ul>
 
         <div className="hidden items-center gap-4 md:flex">
+          {SITE.resume && (
+            <a
+              href={SITE.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 rounded-sm border border-accent/60 px-3 py-1 font-mono text-xs uppercase tracking-widest text-accent transition-colors hover:bg-accent/10"
+            >
+              <FileText size={14} />
+              Resumes
+            </a>
+          )}
           <a
             href={SITE.github}
             target="_blank"
@@ -85,6 +96,20 @@ export function Nav() {
                 </a>
               </li>
             ))}
+            {SITE.resume && (
+              <li>
+                <a
+                  href={SITE.resume}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2 py-2 text-accent"
+                >
+                  <FileText size={16} />
+                  Resumes
+                </a>
+              </li>
+            )}
             <li className="flex gap-5 pt-3">
               <a
                 href={SITE.github}

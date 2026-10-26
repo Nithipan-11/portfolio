@@ -5,6 +5,9 @@ export const SITE = {
   email: "nsivakan@uwaterloo.ca",
   github: "https://github.com/Nithipan-11",
   linkedin: "https://linkedin.com/in/nithipan-sivakanthan",
+  // Google Drive folder with hardware / software / firmware / general resumes.
+  // Leave empty to hide every resume link on the site.
+  resume: "",
   location: "Waterloo, ON",
 };
 
